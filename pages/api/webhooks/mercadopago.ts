@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 import { getMerchantOrder } from "lib/mercadopago";
-import { sendEmail } from "lib/sendgrid";
+// import { sendEmail } from "lib/sendgrid";
 
 import { Order } from "lib/models/order";
 
