@@ -1,0 +1,31 @@
+{
+  "name": "passwordless",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/MaxiJ16/desafio-listas.git",
+  "author": "Maxi Jofré <maxijofre.c@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next"
+  },
+  "dependencies": {
+    "@sendgrid/mail": "^7.7.0",
+    "date-fns": "^2.29.2",
+    "firebase-admin": "^11.0.1",
+    "jsonwebtoken": "^8.5.1",
+    "mercadopago": "^1.5.14",
+    "micro-method-router": "^0.1.0",
+    "next": "^12.2.5",
+    "parse-bearer-token": "^1.0.1",
+    "random-seed": "^0.3.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.11",
+    "@types/react": "^18.0.17",
+    "typescript": "^4.7.4"
+  }
+}
