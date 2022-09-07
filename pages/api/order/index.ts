@@ -50,7 +50,7 @@ export async function postHandler(
         unit_price: product.price,
       },
     ],
-    notification_url: "",
+    notification_url: "https://payments-jade.vercel.app/api/webhooks/mercadopago",
     back_urls: { success: "https://apx.school" },
   });
 
