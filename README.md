@@ -1,5 +1,7 @@
 # E-COMMERCE-BACKEND: MVC
 
+API Rest Serverless utilizando el patrón MVC, usa como procesador de pagos Mercado Pago.
+
 <h2 align="left"> Postman Collection </h2>
 https://documenter.getpostman.com/view/15124189/2s7ZE1Mkz3
 
