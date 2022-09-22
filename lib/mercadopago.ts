@@ -5,7 +5,9 @@ mercadopago.configure({
   access_token: process.env.MP_TOKEN,
 });
 
+// HACEMOS UNA F PROPIA DE LA LIB, ASÍ NO EXPONEMOS TODA LA LIBRERIA DE MP HACIA EL RESTO DE NUESTRO BACK
 export async function getMerchantOrder(id) {
+  // HACEMOS UN GET DE LA MERCHANT ORDER
   const res = await mercadopago.merchant_orders.get(id);
   return res.body;
 }
@@ -13,7 +15,10 @@ export async function getMerchantOrder(id) {
 
 // Para crear las preferencias
 export async function createPreference(data) {
-  // Creamos la preferencia
-  const res = await mercadopago.preferences.create(data);
-  return res.body; 
+  try {
+    const res = await mercadopago.preferences.create(data);
+    return res.body; 
+  } catch (error) {
+    return error
+  }
 }

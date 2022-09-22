@@ -1,18 +1,38 @@
 {
-  "name": "passwordless",
+  "name": "e-commercebck",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/MaxiJ16/desafio-listas.git",
+  "repository": "https://github.com/MaxiJ16/payments.git",
   "author": "Maxi Jofré <maxijofre.c@gmail.com>",
   "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next"
+    "start": "next",
+    "test": "ava"
+  },
+  "type": "module",
+  "ava": {
+    "nodeArguments": [
+      "--loader=@esbuild-kit/esm-loader",
+      "--experimental-specifier-resolution=node"
+    ],
+    "environmentVariables": {
+      "TESTING": "true",
+      "JWT_SECRET": "eyefee"
+    },
+    "extensions": {
+      "ts": "module"
+    }
   },
   "dependencies": {
+    "@esbuild-kit/esm-loader": "^2.4.2",
     "@sendgrid/mail": "^7.7.0",
+    "airtable": "^0.11.4",
+    "algoliasearch": "^4.14.2",
+    "ava": "^4.3.3",
     "date-fns": "^2.29.2",
+    "esbuild-node-loader": "^0.8.0",
     "firebase-admin": "^11.0.1",
     "jsonwebtoken": "^8.5.1",
     "mercadopago": "^1.5.14",
@@ -21,7 +41,8 @@
     "parse-bearer-token": "^1.0.1",
     "random-seed": "^0.3.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/node": "^18.7.11",

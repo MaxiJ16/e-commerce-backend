@@ -1,12 +1,21 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { Auth } from "lib/models/auth";
-import { generate } from "lib/jwt";
+import * as yup from "yup";
+import method from "micro-method-router";
+import { Auth } from "models/auth";
+import { checkCodeExpired } from "controllers/auth";
+import { validateBody } from "middlewares/schemas";
 
-export default async function (req: NextApiRequest, res: NextApiResponse) {
+const bodySchema = yup
+  .object()
+  .shape({
+    email: yup.string().required("El email es requerido en el body."),
+    code: yup.number().required("El code es requerido en el body."),
+  })
+  .strict()
+  .noUnknown(true);
+
+export async function authToken(req: NextApiRequest, res: NextApiResponse) {
   const auth = await Auth.findByEmailAndCode(req.body.email, req.body.code);
-  // Generamos un token a partir de este objeto
-
-  console.log(auth);
 
   if (!auth) {
     res.status(401).send({
@@ -14,18 +23,19 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
     });
   }
 
-  // Para extraer la data de firebase con un formato que podamos usar
-  const expires = auth.isCodeExpired();
-
-  // si expiró
-  if (expires) {
+  try {
+    const resExpired = await checkCodeExpired(auth);
+    res.send(resExpired);
+  } catch (error) {
+    // Si expiró
     res.status(401).send({
-      message: "code expirado",
+      error,
     });
   }
-
-  // si no expiró generamos un token y lo devolvemos
-  const token = generate({ userId: auth.data.userId });
-
-  res.send(token);
 }
+
+const handler = method({
+  post: authToken,
+});
+
+export default validateBody(bodySchema, handler);
