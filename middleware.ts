@@ -1,8 +1,9 @@
 import type { NextRequest } from "next/server";
+import { NextResponse } from 'next/server'
 
 export function middleware(req: NextRequest) {
   if (req.method == "OPTIONS") {
-    return new Response("", {
+    return NextResponse.rewrite("", {
       status: 204,
       headers: {
         "Access-Control-Allow-Credentials": "true",
