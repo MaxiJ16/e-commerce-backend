@@ -25,9 +25,12 @@ export async function getUser(
 const bodySchema = yup
   .object()
   .shape({
-    email: yup.string().required("El email es requerido en el body."),
-    username: yup.string().required("El username es requerido en el body."),
+    email: yup.string().notRequired(),
+    username: yup.string(),
+    address: yup.string(),
+    phone: yup.number()
   })
+  .required()
   .strict()
   .noUnknown(true);
 
@@ -38,12 +41,8 @@ export async function modifyUser(
 ) {
   try {
     const resUserModified = await modifiedUser(token.userId, req.body);
-    console.log(resUserModified);
-    
     res.send(resUserModified);
   } catch (error) {
-    console.log(error);
-    
     res.status(400).send({
       error,
     });
