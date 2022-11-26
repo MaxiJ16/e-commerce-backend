@@ -12,6 +12,10 @@ export class Product {
     });
     return res;
   }
+  static async getAllProducts() {
+    const res = await productsIndex.search("");
+    return res;
+  }
   static async getProductById(id: string) {
     try {
       const product = await productsIndex.getObject(id);
