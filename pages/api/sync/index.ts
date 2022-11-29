@@ -26,6 +26,9 @@ export default function (req: NextApiRequest, res: NextApiResponse) {
           return;
         }
         console.log("termino");
+        res.send({
+          message: "Sincronización Realizada.",
+        });
       }
     );
 }
