@@ -30,21 +30,21 @@ export async function createOrder(
 
   const pref = await createPreference({
     external_reference: order.id,
+
     items: [
       {
         id: productId,
         title: product.Name,
         description: `Descripción de ${product.Name}`,
-        picture_url: product.Images.url,
+        picture_url: product.Images[0].url,
         category_id: product.Type,
         quantity: 1,
         currency_id: "ARS",
-        unit_price: product["Unit cost"],
+        unit_price: product.Cost,
       },
     ],
 
     notification_url:
-      // "https://webhook.site/9f8e720c-0015-4e3f-b279-cc7bb0321b3d",
       "https://e-commerce-backend-nbphjkfi2-maxij16.vercel.app/api/webhooks/mercadopago",
     back_urls: { success: "https://apx.school" },
   });
