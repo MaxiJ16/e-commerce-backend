@@ -45,8 +45,8 @@ export async function createOrder(
     ],
 
     notification_url:
-      "https://e-commerce-backend-nbphjkfi2-maxij16.vercel.app/api/webhooks/mercadopago",
-    back_urls: { success: "https://apx.school" },
+      "https://e-commerce-backend-maxij16.vercel.app/api/webhooks/mercadopago",
+    back_urls: { success: "https://e-commerce-frontend-brown.vercel.app/thanks" },
   });
 
   return {
