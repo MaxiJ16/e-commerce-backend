@@ -1,34 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { airtableBase } from "lib/airtable";
-import { productsIndex } from "lib/algolia";
+import { SyncProducts } from "controllers/products";
 
-export default function (req: NextApiRequest, res: NextApiResponse) {
-  airtableBase("Furniture")
-    .select({
-      pageSize: 10,
-    })
-    .eachPage(
-      async function (records, fetchNextPage) {
-        const objects = records.map((r) => {
-          return {
-            objectID: r.id,
-            ...r.fields,
-          };
-        });
-
-        await productsIndex.saveObjects(objects);
-        // De esta forma le decimos trae la página que sigue
-        fetchNextPage();
-      },
-      function done(err) {
-        if (err) {
-          console.error(err);
-          return;
-        }
-        console.log("termino");
-        res.send({
-          message: "Sincronización Realizada.",
-        });
-      }
-    );
+export default async function (req: NextApiRequest, res: NextApiResponse) {
+  try {
+    await SyncProducts();
+    res.status(200).send({ Message: "Sincronizado con éxito" });
+  } catch (error) {
+    res.status(400).send({ error: 400, Message: error });
+  }
 }
