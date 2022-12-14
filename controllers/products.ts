@@ -55,8 +55,6 @@ export async function SyncProducts() {
               ...r.fields,
             };
           });
-
-          console.log(objects);
           await productsIndex.saveObjects(objects);
           // De esta forma le decimos trae la página que sigue
           fetchNextPage();
