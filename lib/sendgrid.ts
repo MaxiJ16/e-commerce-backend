@@ -14,7 +14,7 @@ export async function sendEmail(email: string, code: number) {
   const mailSentRes = await sgMail.send(msgEmail);
 
   return {
-    message: "Código enviado! Revisa tu casilla de mensajes",
+    message: "Codigo enviado! Revisa tu casilla de mensajes",
     res: mailSentRes,
   };
 }
