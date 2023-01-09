@@ -25,7 +25,7 @@ export async function sendConfirmedPayment(email: string, productData) {
     from: "maxijofre.c@gmail.com",
     subject: `Compraste ${productData.Name}!`,
     text: "Pago aprobado!",
-    html: `<h1>APP E-COMMERCE</h1><p>Estimado/a ${email} <p><strong> Hemos recibido el pago de $ ${productData['Unit cost']} por el producto ${productData.Name}, esperamos que lo disfrutes! Saludos </strong></p>`,
+    html: `<h1>APP E-COMMERCE</h1><p>Estimado/a ${email} <p><strong> Hemos recibido el pago de $ ${productData.Cost} por el producto ${productData.Name}, esperamos que lo disfrutes! Saludos </strong></p>`,
   };
 
   const mailSentRes = await sgMail.send(msgEmail);
